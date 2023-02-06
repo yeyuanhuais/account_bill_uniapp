@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "@dcloudio/types",
+      "miniprogram-api-typings",
+      "mini-types",
+      "uni-app-types"
+    ],
+    "vueCompilerOptions": {
+      "experimentalRuntimeMode": "runtime-uni-app"
+    },
+    "include": [
+      "src/**/*.vue"
+    ]
+  }
+}
