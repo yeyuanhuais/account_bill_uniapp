@@ -11,12 +11,15 @@
       "miniprogram-api-typings",
       "mini-types",
       "uni-app-types"
-    ],
-    "vueCompilerOptions": {
-      "experimentalRuntimeMode": "runtime-uni-app"
-    },
-    "include": [
-      "src/**/*.vue"
     ]
-  }
+  },
+  "vueCompilerOptions": {
+    "experimentalRuntimeMode": "runtime-uni-app",
+  },
+  "include": [
+    "src/**/*.js",
+    "src/**/*.d.js",
+    "src/**/*.jsx",
+    "src/**/*.vue"
+  ]
 }

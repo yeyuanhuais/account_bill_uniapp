@@ -1,17 +1,54 @@
-<script>
-export default {
-  onLaunch: function () {
-    console.log('App Launch')
-  },
-  onShow: function () {
-    console.log('App Show')
-  },
-  onHide: function () {
-    console.log('App Hide')
-  },
-}
+<script setup>
+import { getCurrentInstance, nextTick } from "vue";
+import { onLaunch, onShow } from "@dcloudio/uni-app";
+
+onLaunch(() => {
+  uni.getSystemInfo({
+    success(e) {
+      const {
+        appContext: {
+          config: { globalProperties: global },
+        },
+      } = getCurrentInstance(); // 3.0.11
+      nextTick(() => {
+        // #ifndef MP
+        global.StatusBarGlobal = e.statusBarHeight;
+        if (e.platform === "android") {
+          global.CustomBarGlobal = e.statusBarHeight + 50;
+        } else {
+          global.CustomBarGlobal = e.statusBarHeight + 45;
+        }
+        // #endif
+        // #ifdef MP-WEIXIN
+        global.StatusBarGlobal = e.statusBarHeight;
+        const custom = uni.getMenuButtonBoundingClientRect();
+        global.CustomGlobal = custom;
+        global.CustomBarGlobal = custom.bottom + custom.top - e.statusBarHeight;
+        // #endif
+        // #ifdef MP-ALIPAY
+        global.StatusBarGlobal = e.statusBarHeight;
+        global.CustomBarGlobal = e.statusBarHeight + e.titleBarHeight;
+        // #endif;
+      });
+    },
+  });
+});
+
+onShow(() => {
+  console.log("App Show");
+});
 </script>
 
 <style>
 /*每个页面公共css */
+@import "@/component/colorui/main.css";
+@import "@/component/colorui/icon.css";
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

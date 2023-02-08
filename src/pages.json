@@ -5,12 +5,44 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "login"
+			}
+		},
+		{
+			"path": "pages/property/index",
+			"style": {
+				"navigationBarTitleText": "property"
+			}
+		},
+		{
+			"path": "pages/report/index",
+			"style": {
+				"navigationBarTitleText": "report"
+			}
+		},
+		{
+			"path": "pages/more/index",
+			"style": {
+				"navigationBarTitleText": "more"
+			}
+		},
+		{
+			"path": "pages/bill/index",
+			"style": {
+				"navigationBarTitleText": "bill"
+			}
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		// "navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#0081ff",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
 	}
 }

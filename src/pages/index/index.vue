@@ -1,48 +1,81 @@
 <template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
+  <view>
+    <!-- <cu_custom bg-color="bg-gradual-blue">
+      <template #content>{{ pageCur }}</template>
+    </cu_custom> -->
+    <cuCustom bg-color="bg-gradual-blue" :is-back="false">
+      <template #content>{{ barTitle }}</template>
+    </cuCustom>
+    <property v-if="pageCur == 'property'"></property>
+    <report v-if="pageCur == 'report'"></report>
+    <bill v-if="pageCur == 'bill'"></bill>
+    <more v-if="pageCur == 'more'"></more>
+    <view class="bg-white shadow cu-bar tabbar foot">
+      <block v-for="item in menuList" :key="item.id">
+        <view class="action" :data-cur="item.id" @click="navChange">
+          <view class="cuIcon-cu-image">
+            <iconfont v-if="pageCur == item.id" class="barIcon" :name="item.icon" size="45rpx" fill="#39b54a" />
+            <iconfont v-else class="barIcon" :name="item.icon" size="45rpx" fill="#aaaaaa" />
+          </view>
+          <view :class="pageCur === item.id ? 'text-green' : 'text-gray'" class="fs30">{{ item.name }}</view>
+        </view>
+      </block>
     </view>
   </view>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      title: 'Hello',
-    }
+<script setup>
+import iconfont from "@/component/iconfont/iconfont.vue";
+import { ref, computed } from "vue";
+import cuCustom from "@/component/cuCustom.vue";
+import property from "@/pages/property";
+import report from "@/pages/report";
+import bill from "@/pages/bill";
+import more from "@/pages/more";
+
+const pageCur = ref("more");
+const menuList = ref([
+  {
+    name: "资产",
+    icon: "icon_zhanghuzichan",
+    id: "property",
   },
-  onLoad() {},
-  methods: {},
-}
+  {
+    name: "报表",
+    icon: "icon_baobiao",
+    id: "report",
+  },
+  {
+    name: "账单",
+    icon: "icon_zhangdan",
+    id: "bill",
+  },
+  {
+    name: "更多",
+    icon: "icon_yonghu",
+    id: "more",
+  },
+]);
+const barTitle = computed(() => {
+  return menuList.value.filters((item) => item.id === pageCur.value)[0].name;
+});
+const navChange = (e) => {
+  pageCur.value = e.currentTarget.dataset.cur;
+};
 </script>
 
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+<style lang="less" scoped>
+.cuIcon-cu-image {
+  margin: 0 auto;
 }
 
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
+.barIcon {
+  width: 36upx;
+  height: 36upx;
+  display: inline-block;
 }
 
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+.fs30 {
+  font-size: 30rpx;
 }
 </style>
