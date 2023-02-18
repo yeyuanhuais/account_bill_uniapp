@@ -1,23 +1,20 @@
 <template>
-  <view>
-    <!-- <cu_custom bg-color="bg-gradual-blue">
-      <template #content>{{ pageCur }}</template>
-    </cu_custom> -->
+  <view class="pages">
     <cuCustom bg-color="bg-gradual-blue" :is-back="false">
       <template #content>{{ barTitle }}</template>
     </cuCustom>
-    <property v-if="pageCur == 'property'"></property>
-    <report v-if="pageCur == 'report'"></report>
-    <bill v-if="pageCur == 'bill'"></bill>
-    <more v-if="pageCur == 'more'"></more>
+    <property v-if="pageCur == 'property'" class="minHeight"></property>
+    <report v-if="pageCur == 'report'" class="minHeight"></report>
+    <bill v-if="pageCur == 'bill'" class="minHeight"></bill>
+    <more v-if="pageCur == 'more'" class="minHeight"></more>
     <view class="bg-white shadow cu-bar tabbar foot">
       <block v-for="item in menuList" :key="item.id">
         <view class="action" :data-cur="item.id" @click="navChange">
           <view class="cuIcon-cu-image">
-            <iconfont v-if="pageCur == item.id" class="barIcon" :name="item.icon" size="45rpx" fill="#39b54a" />
+            <iconfont v-if="pageCur == item.id" class="barIcon" :name="item.icon" size="45rpx" fill="#0081ff" />
             <iconfont v-else class="barIcon" :name="item.icon" size="45rpx" fill="#aaaaaa" />
           </view>
-          <view :class="pageCur === item.id ? 'text-green' : 'text-gray'" class="fs30">{{ item.name }}</view>
+          <view :class="pageCur === item.id ? 'text-blue' : 'text-gray'" class="fs30">{{ item.name }}</view>
         </view>
       </block>
     </view>
@@ -26,13 +23,14 @@
 
 <script setup>
 import iconfont from "@/component/iconfont/iconfont.vue";
-import { ref, computed } from "vue";
+import { ref, computed, getCurrentInstance } from "vue";
 import cuCustom from "@/component/cuCustom.vue";
 import property from "@/pages/property";
 import report from "@/pages/report";
 import bill from "@/pages/bill";
 import more from "@/pages/more";
 
+const customBar = ref(getCurrentInstance().appContext.config.globalProperties.CustomBarPxGlobal);
 const pageCur = ref("more");
 const menuList = ref([
   {
@@ -57,14 +55,20 @@ const menuList = ref([
   },
 ]);
 const barTitle = computed(() => {
-  return menuList.value.filters((item) => item.id === pageCur.value)[0].name;
+  return menuList.value.filter((item) => item.id === pageCur.value)[0].name;
 });
 const navChange = (e) => {
   pageCur.value = e.currentTarget.dataset.cur;
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="css" scoped>
+.pages {
+  height: calc(100vh - v-bind(customBar));
+}
+.minHeight {
+  /* min-height: calc(100vh - v-bind(customBar)- (100upx + env(safe-area-inset-bottom) / 2)); */
+}
 .cuIcon-cu-image {
   margin: 0 auto;
 }

@@ -3,67 +3,64 @@
 </template>
 
 <script>
-import iconfont from "./iconfont.js";
-
+import iconfont from './iconfont.js';
 export default {
   props: {
     name: {
       type: String,
-      required: true,
+      required: true
     },
     size: {
-      type: String,
+      type: String
     },
     fill: {
       type: [String, Array],
-      default: "",
-    },
+      default: ''
+    }
+  },
+  computed: {
+    iconStyle() {
+      const SIGN = 'uni';
+      const name = this.hyphen2Hump(`${SIGN}_${this.name}`);
+      return iconfont[name](this.options);
+    }
   },
   data() {
     return {
       options: {
         quot: '"',
         svgSize: this.size,
-        isStr: typeof this.fill === "string",
-        colors: this.fixColor(),
-      },
+        isStr: typeof this.fill === 'string',
+        colors: this.fixColor()
+      }
     };
-  },
-  computed: {
-    iconStyle() {
-      const SIGN = "uni";
-      const name = this.hyphen2Hump(`${SIGN}_${this.name}`);
-      return iconfont[name](this.options);
-    },
   },
   methods: {
     fixColor() {
       const color = this.fill;
-      if (typeof color === "string") {
-        return color.indexOf("#") === 0 ? this.hex2rgb(color) : color;
+      if (typeof color === 'string') {
+        return color.indexOf('#') === 0 ? this.hex2rgb(color) : color;
       }
-      return color.map(function (item) {
-        return item.indexOf("#") === 0 ? this.hex2rgb(item) : item;
+      return color.map(function(item) {
+        return item.indexOf('#') === 0 ? this.hex2rgb(item) : item;
       });
     },
     hex2rgb(hex) {
       const rgb = [];
-      // eslint-disable-next-line no-param-reassign
       hex = hex.substr(1);
       if (hex.length === 3) {
-        // eslint-disable-next-line no-param-reassign
-        hex = hex.replace(/(.)/g, "$1$1");
+        hex = hex.replace(/(.)/g, '$1$1');
       }
       hex.replace(/../g, (color) => {
         rgb.push(parseInt(color, 0x10));
         return color;
       });
-      return `rgb(${rgb.join(",")})`;
+      return 'rgb(' + rgb.join(',') + ')';
     },
     hyphen2Hump(str) {
       return str.replace(/-(\w)/g, (_match, letter) => letter.toUpperCase());
-    },
-  },
+    }
+  }
 };
 </script>
 

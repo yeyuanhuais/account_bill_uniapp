@@ -18,25 +18,27 @@ onLaunch(() => {
         } else {
           global.CustomBarGlobal = e.statusBarHeight + 45;
         }
+        global.CustomBarPxGlobal = `${global.CustomBarGlobal}px`;
         // #endif
         // #ifdef MP-WEIXIN
         global.StatusBarGlobal = e.statusBarHeight;
         const custom = uni.getMenuButtonBoundingClientRect();
         global.CustomGlobal = custom;
         global.CustomBarGlobal = custom.bottom + custom.top - e.statusBarHeight;
+        // 高度加px 如68px
+        global.CustomBarPxGlobal = `${global.CustomBarGlobal}px`;
         // #endif
         // #ifdef MP-ALIPAY
         global.StatusBarGlobal = e.statusBarHeight;
         global.CustomBarGlobal = e.statusBarHeight + e.titleBarHeight;
+        global.CustomBarPxGlobal = `${global.CustomBarGlobal}px`;
         // #endif;
       });
     },
   });
 });
 
-onShow(() => {
-  console.log("App Show");
-});
+onShow(() => {});
 </script>
 
 <style>

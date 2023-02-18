@@ -35,6 +35,18 @@
 			"style": {
 				"navigationBarTitleText": "bill"
 			}
+		},
+		{
+			"path": "pages/more/classification/index",
+			"style": {
+				"navigationBarTitleText": "classification"
+			}
+		},
+		{
+			"path": "pages/more/classification/comps/addOrEdit",
+			"style": {
+				"navigationBarTitleText": "添加编辑分类"
+			}
 		}
 	],
 	"globalStyle": {

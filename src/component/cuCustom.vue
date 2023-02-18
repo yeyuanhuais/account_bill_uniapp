@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed, getCurrentInstance } from "vue";
+import { ref, computed, getCurrentInstance } from "vue";
 
 const statusBar = ref(getCurrentInstance().appContext.config.globalProperties.StatusBarGlobal);
 const customBar = ref(getCurrentInstance().appContext.config.globalProperties.CustomBarGlobal);
