@@ -1,10 +1,10 @@
 <template>
   <cuCustom bg-color="bg-gradual-blue" :is-back="true">
-    <template #content>{{ formData.value?.id ? "编辑" : "添加" }}分类</template>
+    <template #content>{{ formData?.id ? "编辑" : "添加" }}分类</template>
   </cuCustom>
   <view class="cu-form-group margin-tb solid-bottom">
-    <iconfont v-if="formData.value.icon" :name="formData.value.icon" size="90rpx" />
-    <input class="margin-left" placeholder="分类名称" :value="formData.value.name" />
+    <iconfont v-if="formData.icon" :name="formData.icon" size="90rpx" />
+    <input class="margin-left" placeholder="分类名称" :value="formData.name" @change="onNameChange" />
   </view>
   <view class="flex flex-wrap justify-start padding-lr-xs">
     <template v-for="(item, index) in iconData" :key="index">
@@ -27,7 +27,7 @@
 import iconfont from "@/component/iconfont/iconfont.vue";
 import cuCustom from "@/component/cuCustom.vue";
 import request from "@/utils/request";
-import { reactive, getCurrentInstance, ref } from "vue";
+import { getCurrentInstance, ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 
 const iconData = [
@@ -89,21 +89,32 @@ const iconData = [
   "icon_shoukuan",
   "icon_daikuan",
 ];
-const formData = reactive({ value: { icon: "icon_yuer" } });
 const editFormData = ref({});
+const formData = ref({});
 const onIconChange = (val) => {
-  console.log("%c value", "font-size:13px; background:pink; color:#bf2c9f;", val);
-  formData.value.icon = val;
+  formData.value = { ...formData.value, icon: val };
 };
+const onNameChange = ({ detail }) => {
+  formData.value = { ...formData.value, name: detail.value };
+};
+
 const onReset = () => {
-  console.log("%c formData", "font-size:13px; background:pink; color:#bf2c9f;", editFormData.value);
-  // formData.value = Object.assign(editFormData.value);
+  formData.value = { ...editFormData.value };
 };
-const onSumbit = (value) => {
+const onSumbit = () => {
+  const url = formData.value.id ? "/api/classification/update" : "/api/classification/create";
   request
-    .get("/api/classification/getAll", { ...value })
-    .then((res) => {
+    .post(url, {
+      name: formData.value.name,
+      icon: formData.value.icon,
+      type: formData.value.type,
+      id: formData.value.id || undefined,
+    })
+    .then(() => {
       uni.showToast({ title: "成功", mask: true, icon: "success" });
+      uni.navigateBack({
+        delta: 1,
+      });
     })
     .finally(() => {});
 };
@@ -113,8 +124,8 @@ onLoad(() => {
   // const eventChannel = this.getOpenerEventChannel();
   // // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
   eventChannel.on("selectObj", (data) => {
-    formData.value = Object.assign(data);
-    editFormData.value = Object.assign(data);
+    formData.value = { ...data };
+    editFormData.value = data;
   });
 });
 </script>

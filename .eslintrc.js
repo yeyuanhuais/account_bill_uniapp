@@ -43,13 +43,7 @@ module.exports = {
     "import/extensions": "off",
     "import/no-absolute-path": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
-    "no-param-reassign": [
-      "error",
-      {
-        props: true,
-        ignorePropertyModificationsFor: ["config", "app"],
-      },
-    ],
+    "no-param-reassign": "off",
     "prettier/prettier": "error",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
@@ -57,6 +51,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-unused-vars": "warn",
     "consistent-return": "off",
+    "no-plusplus": "warn",
   },
   settings: {
     "import/ignore": ["node_modules"],

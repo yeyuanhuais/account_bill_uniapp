@@ -1,3 +1,4 @@
+<!-- 废弃 不使用 -->
 <template>
   <view class="toast-fixed-center" hidden="{{!loading}}" style="z-index: 99">
     <view
@@ -41,7 +42,6 @@ const end = () => {
  * @param {*} fun
  */
 const setShow = (status, message, time = 2000, fun = false) => {
-  console.log("%c status, message", "font-size:13px; background:pink; color:#bf2c9f;", status, message);
   loading.value = true;
   try {
     messageVal.value = message;

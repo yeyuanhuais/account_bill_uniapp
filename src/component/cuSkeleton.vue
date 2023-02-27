@@ -41,7 +41,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  avatar: Boolean,
+  avatar: {
+    type: Boolean,
+    default: false,
+  },
   multiple: Boolean, // 是否渲染多个
 });
 </script>

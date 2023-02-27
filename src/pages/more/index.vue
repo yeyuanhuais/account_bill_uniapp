@@ -56,7 +56,9 @@ const functionList = ref([
   {
     icon: "settings",
     color: "blue",
+    url: "/pages/more/cycleBill/index",
     name: "周期帐",
+    type: "jump",
   },
   {
     icon: "settings",

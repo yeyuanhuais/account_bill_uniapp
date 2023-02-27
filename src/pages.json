@@ -1,60 +1,79 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		},
-		{
-			"path": "pages/login/index",
-			"style": {
-				"navigationBarTitleText": "login"
-			}
-		},
-		{
-			"path": "pages/property/index",
-			"style": {
-				"navigationBarTitleText": "property"
-			}
-		},
-		{
-			"path": "pages/report/index",
-			"style": {
-				"navigationBarTitleText": "report"
-			}
-		},
-		{
-			"path": "pages/more/index",
-			"style": {
-				"navigationBarTitleText": "more"
-			}
-		},
-		{
-			"path": "pages/bill/index",
-			"style": {
-				"navigationBarTitleText": "bill"
-			}
-		},
-		{
-			"path": "pages/more/classification/index",
-			"style": {
-				"navigationBarTitleText": "classification"
-			}
-		},
-		{
-			"path": "pages/more/classification/comps/addOrEdit",
-			"style": {
-				"navigationBarTitleText": "添加编辑分类"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "uni-app",
-		// "navigationBarBackgroundColor": "#F8F8F8",
-		"navigationBarBackgroundColor": "#0081ff",
-		"backgroundColor": "#F8F8F8",
-		"navigationStyle": "custom"
-	}
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "uni-app"
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "login"
+      }
+    },
+    {
+      "path": "pages/property/index",
+      "style": {
+        "navigationBarTitleText": "property"
+      }
+    },
+    {
+      "path": "pages/report/index",
+      "style": {
+        "navigationBarTitleText": "report"
+      }
+    },
+    {
+      "path": "pages/more/index",
+      "style": {
+        "navigationBarTitleText": "more"
+      }
+    },
+    {
+      "path": "pages/bill/index",
+      "style": {
+        "navigationBarTitleText": "bill"
+      }
+    },
+    {
+      "path": "pages/more/classification/index",
+      "style": {
+        "navigationBarTitleText": "classification"
+      }
+    },
+    {
+      "path": "pages/more/classification/comps/addOrEdit",
+      "style": {
+        "navigationBarTitleText": "添加编辑分类"
+      }
+    },
+    {
+      "path": "pages/more/cycleBill/index",
+      "style": {
+        "navigationBarTitleText": "cycleBill"
+      }
+    },
+    {
+      "path": "pages/more/cycleBill/comps/addOrEdit",
+      "style": {
+        "navigationBarTitleText": "添加编辑周期帐"
+      }
+    },
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "uni-app",
+    // "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarBackgroundColor": "#0081ff",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
 }

@@ -12,6 +12,7 @@ export default defineConfig({
       cache: false,
     }),
   ],
+  transpileDependencies: ["@dcloudio/uni-ui"],
   resolve: {
     modules: ["../node_modules"],
     alias: {

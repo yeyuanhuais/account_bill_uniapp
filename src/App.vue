@@ -41,10 +41,12 @@ onLaunch(() => {
 onShow(() => {});
 </script>
 
-<style>
+<style lang="less">
 /*每个页面公共css */
 @import "@/component/colorui/main.css";
 @import "@/component/colorui/icon.css";
+@import "@/component/colorui/animation.css";
+@import "./uni.less";
 
 .icon {
   width: 1em;
@@ -52,5 +54,8 @@ onShow(() => {});
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+#app {
+  background-color: #f1f5f9;
 }
 </style>

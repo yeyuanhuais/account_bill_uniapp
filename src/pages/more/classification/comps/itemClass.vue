@@ -17,12 +17,15 @@
           <view class="text-gray text-sm"> {{ item.total || 0 }}&nbsp;笔交易 </view>
         </view>
         <view class="move">
-          <view class="bg-grey" @click="onEdit(item)">编辑</view>
-          <view class="bg-red" @click="onDelete">删除</view>
+          <view class="bg-grey" @click="onUpdate(item)">编辑</view>
+          <view class="bg-red" @click="onDelete(item)">删除</view>
         </view>
       </view>
     </view>
   </cuSkeleton>
+  <view v-if="!modalName" class="classAdd animation-slide-right" @click="onCreate()">
+    <text class="cuIcon-roundaddfill text-blue text-shadow-blue" style="font-size: 100rpx"></text>
+  </view>
 </template>
 
 <script setup>
@@ -34,7 +37,7 @@ const props = defineProps({
   list: { type: Array, default: () => [] },
   loading: { type: Boolean, default: false },
 });
-const emit = defineEmits(["on-edit"]);
+const emit = defineEmits(["on-update", "on-create", "on-delete"]);
 const modalName = ref(null);
 const startX = ref(""); // 滑动开始x轴的位置
 const touchDirection = ref(null); // 滑动方向
@@ -56,14 +59,27 @@ const listTouchEnd = (e) => {
   }
   touchDirection.value = null;
 };
-const onEdit = (value) => {
-  emit("on-edit", value);
+const onUpdate = (value) => {
+  emit("on-update", value);
 };
-const onDelete = () => {};
+const onCreate = (value) => {
+  emit("on-create", value);
+};
+const onDelete = (value) => {
+  emit("on-delete", value);
+};
 </script>
 
 <style scoped lang="less">
 .cu-avatar {
   background-color: transparent;
+}
+.cu-item {
+  margin: 0;
+}
+.classAdd {
+  position: fixed;
+  bottom: 7%;
+  right: 3%;
 }
 </style>
